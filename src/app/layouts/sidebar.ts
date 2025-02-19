@@ -50,17 +50,17 @@ export class SidebarComponent {
         }
     }
 
-    toggleMobileMenu() {
-        if (window.innerWidth < 1024) {
-            this.storeData.dispatch({ type: 'toggleSidebar' });
-        }
-    }
-
     toggleAccordion(name: string, parent?: string) {
         if (this.activeDropdown.includes(name)) {
             this.activeDropdown = this.activeDropdown.filter((d) => d !== name);
         } else {
             this.activeDropdown.push(name);
+        }
+    }
+
+    toggleMobileMenu() {
+        if (window.innerWidth < 1024) {
+            this.storeData.dispatch({ type: 'toggleSidebar' });
         }
     }
 }

@@ -16,39 +16,74 @@
             </div>
             <ng-scrollbar class="relative !h-[calc(100vh-80px)]" appearance="compact">
                 <ul class="relative space-y-0.5 p-4 py-0 font-semibold">
-                    <li class="accordion menu nav-item">
-                        <button type="button" class="nav-link group w-full"
-                            [ngClass]="{ active: activeDropdown.includes('authentication') }"
-                            (click)="toggleAccordion('authentication')">
-                            <div class="flex items-center">
-                                <icon-menu-authentication class="shrink-0 group-hover:!text-primary" />
-
-                                <span
-                                    class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">{{
-                                    'authentication' | translate }}</span>
-                            </div>
-                            <div [ngClass]="{ 'rtl:rotate-90 -rotate-90': !activeDropdown.includes('authentication') }">
-                                <icon-caret-down />
-                            </div>
-                        </button>
-                        <div [@slideDownUp]="!activeDropdown.includes('authentication')" class="accordion-content">
-                            <ul class="sub-menu text-gray-500">
-                                <li routerLinkActive="active" (click)="toggleMobileMenu()">
-                                    <a routerLink="/auth/signin" target="_blank">{{ 'login_boxed' | translate }}</a>
-                                </li>
-                                <li routerLinkActive="active" (click)="toggleMobileMenu()">
-                                    <a routerLink="/auth/signup" target="_blank">{{ 'register_boxed' | translate }}</a>
-                                </li>
-                                <li routerLinkActive="active" (click)="toggleMobileMenu()">
-                                    <a routerLink="/auth/lockscreen" target="_blank">{{ 'unlock_boxed' | translate
-                                        }}</a>
-                                </li>
-                                <li routerLinkActive="active" (click)="toggleMobileMenu()">
-                                    <a routerLink="/auth/forgot-password" target="_blank">{{ 'recover_id_boxed' |
-                                        translate }}</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <li class="nav-item">
+                        <ul>
+                            <li class="nav-item">
+                                <a routerLink="/" class="group" routerLinkActive="active" (click)="toggleMobileMenu()">
+                                    <div class="flex items-center">
+                                        <icon-menu-dashboard class="shrink-0 group-hover:!text-primary" />
+                                        <span
+                                            class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">{{
+                                            'home' | translate }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/search" class="group" routerLinkActive="active"
+                                    (click)="toggleMobileMenu()">
+                                    <div class="flex items-center">
+                                        <icon-menu-font-icons class="shrink-0 group-hover:!text-primary" />
+                                        <span
+                                            class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">{{
+                                            'search' | translate }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/notifications" class="group" routerLinkActive="active"
+                                    (click)="toggleMobileMenu()">
+                                    <div class="flex items-center">
+                                        <icon-menu-mailbox class="shrink-0 group-hover:!text-primary" />
+                                        <span
+                                            class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">{{
+                                            'notifications' | translate }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/chat" class="group" routerLinkActive="active"
+                                    (click)="toggleMobileMenu()">
+                                    <div class="flex items-center">
+                                        <icon-menu-chat class="shrink-0 group-hover:!text-primary" />
+                                        <span
+                                            class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">{{
+                                            'chat' | translate }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/profile" class="group" routerLinkActive="active"
+                                    (click)="toggleMobileMenu()">
+                                    <div class="flex items-center">
+                                        <icon-menu-users class="shrink-0 group-hover:!text-primary" />
+                                        <span
+                                            class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">{{
+                                            'profile' | translate }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/settings" class="group" routerLinkActive="active"
+                                    (click)="toggleMobileMenu()">
+                                    <div class="flex items-center">
+                                        <icon-menu-widgets class="shrink-0 group-hover:!text-primary" />
+                                        <span
+                                            class="text-black dark:text-[#506690] dark:group-hover:text-white-dark ltr:pl-3 rtl:pr-3">{{
+                                            'settings' | translate }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </ng-scrollbar>

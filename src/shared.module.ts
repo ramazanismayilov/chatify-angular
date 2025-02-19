@@ -27,11 +27,12 @@ import { ClipboardModule } from 'ngx-clipboard';
 @NgModule({
     imports: [
         CommonModule,
+        QuillModule.forRoot(),
+        FlatpickrModule.forRoot(),
+        TranslateModule.forChild(),
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-
-        TranslateModule.forChild(),
         NgScrollbarModule,
         DataTableModule,
         MenuModule,
@@ -39,7 +40,6 @@ import { ClipboardModule } from 'ngx-clipboard';
         NgApexchartsModule,
         HighlightModule,
         SortablejsModule,
-        QuillModule.forRoot(),
         IconModule,
         NgxCustomModalComponent,
         FullCalendarModule,
@@ -48,7 +48,6 @@ import { ClipboardModule } from 'ngx-clipboard';
         NgSelectModule,
         TextMaskModule,
         NouisliderModule,
-        FlatpickrModule.forRoot(),
         ClipboardModule,
     ],
     declarations: [],

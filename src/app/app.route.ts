@@ -6,6 +6,9 @@ export const routes: Routes = [
     {
         path: '',
         component: AppLayout,
+        children: [
+            { path: '', loadChildren: () => import('./pages/client.module').then((d) => d.ClientModule) },
+        ],
     },
     {
         path: '',
@@ -13,5 +16,5 @@ export const routes: Routes = [
         children: [
             { path: '', loadChildren: () => import('./auth/auth.module').then((d) => d.AuthModule) },
         ],
-    },
+    }
 ];

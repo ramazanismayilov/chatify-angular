@@ -9,7 +9,7 @@ import { AppService } from '../core/services/app.service';
 export class AuthLayout {
     store: any;
     showTopButton = false;
-    constructor(public storeData: Store<any>, private service: AppService) {
+    constructor(public storeData: Store<any>) {
         this.initStore();
     }
     headerClass = '';
