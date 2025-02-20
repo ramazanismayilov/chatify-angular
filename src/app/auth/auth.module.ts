@@ -8,6 +8,7 @@ import { SignupComponent } from './signup/signup';
 import { ForgotPasswordComponent } from './forgotpassword/forgot-password';
 
 const routes: Routes = [
+    { path: 'auth', redirectTo: 'auth/signin', pathMatch: 'full' },
     { path: 'auth/lockscreen', component: LockscreenComponent, data: { title: 'Lockscreen' } },
     { path: 'auth/forgot-password', component: ForgotPasswordComponent, data: { title: 'Forgot Password' } },
     { path: 'auth/signin', component: SigninComponent, data: { title: 'Signin' } },
