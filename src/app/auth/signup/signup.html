@@ -49,23 +49,63 @@
                             register</p>
                     </div>
                     <form [formGroup]="signUpForm" class="space-y-5 dark:text-white" (submit)="signUp()">
-                        <div class="phoneOrEmail">
-                            <input formControlName="phoneOrEmail" type="text" placeholder="Mobile number or Email"
+                        <div class="email">
+                            <input formControlName="email" type="email" placeholder="Email"
+                                class="form-input text-white-dark placeholder:text-white-dark" />
+                            <ng-container *ngIf="signUpForm.controls['email'].hasError('email')">
+                                <p class="mt-1 text-danger">Please enter a valid email.</p>
+                            </ng-container>
+                        </div>
+                        <div class="phone">
+                            <input formControlName="phone" type="text" placeholder="Phone"
                                 class="form-input text-white-dark placeholder:text-white-dark" />
                         </div>
                         <div class="password">
                             <input formControlName="password" type="password" placeholder="Password"
                                 class="form-input text-white-dark placeholder:text-white-dark" />
+                            <ng-container
+                                *ngIf="signUpForm.controls['password'].invalid && signUpForm.controls['password'].touched">
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signUpForm.controls['password'].hasError('required')">
+                                    Password is required.
+                                </p>
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signUpForm.controls['password'].hasError('minlength')">
+                                    Password must be at least 6 characters long.
+                                </p>
+                            </ng-container>
                         </div>
                         <div class="username">
                             <input formControlName="username" type="text" placeholder="Username"
                                 class="form-input text-white-dark placeholder:text-white-dark" />
+                            <div class="mt-2 flex items-center gap-2" *ngIf="usernameSuggestions.length > 0">
+                                <div class="suggestions w-full bg-white dark:bg-[#121e32] dark:text-white-dark rounded-md px-4 py-2 text-center cursor-pointer"
+                                    *ngFor="let item of usernameSuggestions" (click)="onSuggestionClick(item)">
+                                    {{ item }}
+                                </div>
+                            </div>
+                            <ng-container
+                                *ngIf="signUpForm.controls['username'].invalid && signUpForm.controls['username'].touched">
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signUpForm.controls['username'].hasError('required')">
+                                    Username is required.
+                                </p>
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signUpForm.controls['username'].hasError('minlength')">
+                                    Username must be longer than 4 characters.
+                                </p>
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signUpForm.controls['username'].hasError('maxlength')">
+                                    Username must be less than 20 characters.
+                                </p>
+                            </ng-container>
                         </div>
                         <div class="fullName">
                             <input formControlName="fullName" type="text" placeholder="Full Name"
                                 class="form-input text-white-dark placeholder:text-white-dark" />
                         </div>
-                        <button type="submit"
+                        <button type="submit" [disabled]="signUpForm.invalid"
+                            [ngClass]="{'opacity-50': signUpForm.invalid}"
                             class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
                             Sign Up
                         </button>

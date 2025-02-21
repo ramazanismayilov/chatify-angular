@@ -1,6 +1,8 @@
+@import 'select2.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer components {
     html {

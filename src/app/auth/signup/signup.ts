@@ -6,8 +6,8 @@ import { AppService } from '../../core/services/app.service';
 import { toggleAnimation } from 'src/app/shared/animations/toggle.animation';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { phoneOrEmailValidator } from 'src/app/shared/validators/phoneOrEmail.validator';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { cleanFormData } from 'src/app/shared/utils/clean-formdata.utils';
 
 @Component({
     templateUrl: './signup.html',
@@ -16,6 +16,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 export class SignupComponent implements OnInit {
     store: any;
     signUpForm!: FormGroup
+    usernameSuggestions: string[] = []
 
     constructor(
         public router: Router,
@@ -24,39 +25,40 @@ export class SignupComponent implements OnInit {
         private appSetting: AppService,
         private authService: AuthService,
         public translate: TranslateService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
     ) {
         this.initStore();
     }
 
     ngOnInit() {
         this.signUpForm = this.fb.group({
-            phoneOrEmail: ["", [phoneOrEmailValidator]],
+            email: [null, [Validators.email]],
+            phone: [null, [Validators.minLength(6), Validators.maxLength(15)]],
             password: ["", [Validators.required, Validators.minLength(6)]],
-            username: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-            fullName: ["", [Validators.minLength(4), Validators.maxLength(20)]]
+            username: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(25)]],
+            fullName: [null, [Validators.minLength(4), Validators.maxLength(20)]]
         })
     }
 
     signUp() {
-        let hasEmail = this.signUpForm.get("phoneOrEmail")?.value.includes("@")
-        let params = {
-            email: hasEmail ? this.signUpForm.get("phoneOrEmail")?.value : undefined,
-            phone: !hasEmail ? this.signUpForm.get("phoneOrEmail")?.value : undefined,
-            password: this.signUpForm.get("password")?.value,
-            username: this.signUpForm.get("username")?.value,
-            fullName: this.signUpForm.get("fullName")?.value,
-        }
-
-        this.authService.signUp(params).subscribe({
+        const cleanedFormValue = cleanFormData(this.signUpForm.value);
+        this.authService.signUp(cleanedFormValue).subscribe({
             next: (response) => {
                 this.notificationService.showMessage(response.message, 'success', 'top')
                 this.router.navigate(['/'])
             },
             error: (error) => {
-                console.log("Error", error);
+                if (error.error.suggestions) {
+                    this.usernameSuggestions = error.error.suggestions
+                }
+                this.notificationService.showMessage(error.error.message, 'error', 'top');
             }
         })
+    }
+
+    onSuggestionClick(suggestion: string) {
+        this.signUpForm.get('username')?.patchValue(suggestion);
+        this.usernameSuggestions = [];
     }
 
     async initStore() {

@@ -6,11 +6,9 @@ import { finalize, Observable } from 'rxjs';
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
   constructor(public spinnerService: SpinnerService) { }
-  
+
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
     this.spinnerService.showSpinner()
-    console.log("fff");
 
     return next.handle(request).pipe(
       finalize(() => {
