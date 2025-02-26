@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     selector: 'header',
     templateUrl: './header.html',
     animations: [toggleAnimation],
+    standalone: false
 })
 export class HeaderComponent {
     store: any;

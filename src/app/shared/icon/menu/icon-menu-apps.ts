@@ -41,6 +41,7 @@
             </svg>
         </ng-template>
     `,
+    standalone: false
 })
 export class IconMenuAppsComponent {
     @Input() class: any = '';

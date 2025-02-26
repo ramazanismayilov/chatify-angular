@@ -8,6 +8,7 @@ import { toggleAnimation } from 'src/app/shared/animations/toggle.animation';
 @Component({
     templateUrl: './forgot-password.html',
     animations: [toggleAnimation],
+    standalone: false
 })
 export class ForgotPasswordComponent {
     store: any;

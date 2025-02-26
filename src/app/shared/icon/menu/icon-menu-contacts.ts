@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 @Component({
-  selector: 'icon-menu-contacts',
-  template: `
+    selector: 'icon-menu-contacts',
+    template: `
     <ng-template #template>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" [ngClass]="class">
         <path
@@ -18,6 +18,7 @@ import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
       </svg>
     </ng-template>
   `,
+    standalone: false
 })
 export class IconMenuContactsComponent {
   @Input() class: any = '';

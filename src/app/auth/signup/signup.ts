@@ -12,6 +12,7 @@ import { cleanFormData } from 'src/app/shared/utils/clean-formdata.utils';
 @Component({
     templateUrl: './signup.html',
     animations: [toggleAnimation],
+    standalone: false
 })
 export class SignupComponent implements OnInit {
     store: any;

@@ -37,6 +37,7 @@ import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
             </svg>
         </ng-template>
     `,
+    standalone: false
 })
 export class IconBitcoinComponent {
     @Input() class: any = '';

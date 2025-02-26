@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'setting',
     templateUrl: './theme-customizer.html',
+    standalone: false
 })
 export class ThemeCustomizerComponent {
     store: any;

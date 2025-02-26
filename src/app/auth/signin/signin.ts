@@ -8,6 +8,7 @@ import { toggleAnimation } from 'src/app/shared/animations/toggle.animation';
 @Component({
     templateUrl: './signin.html',
     animations: [toggleAnimation],
+    standalone: false
 })
 export class SigninComponent {
     store: any;
