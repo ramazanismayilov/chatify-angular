@@ -17,4 +17,8 @@ export class AuthService {
       })
     )
   }
+
+  loginWithGoogle(token: string): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/auth/firebase`, { token })
+  }
 }

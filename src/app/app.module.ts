@@ -20,6 +20,7 @@ import { SidebarComponent } from './layouts/sidebar';
 import { ThemeCustomizerComponent } from './layouts/theme-customizer';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 
+
 export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader {
     return new TranslateHttpLoader(new HttpClient(httpHandler));
 }
