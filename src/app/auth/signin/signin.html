@@ -45,21 +45,49 @@
                     <div class="mb-10">
                         <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">Sign in
                         </h1>
-                        <p class="text-base font-bold leading-normal text-white-dark">Enter your email and password to
+                        <p class="text-base font-bold leading-normal text-white-dark">Enter your username and password
+                            to
                             login</p>
                     </div>
-                    <form class="space-y-5 dark:text-white" (submit)="router.navigate(['/'])">
-                        <div class="phoneOrUsernameOrEmail">
-                            <input type="email" placeholder="Phone number, username, or email"
+                    <form [formGroup]="signInForm" class="space-y-5 dark:text-white" (submit)="signIn()">
+                        <div class="username">
+                            <input formControlName="username" type="text" placeholder="Username"
                                 class="form-input text-white-dark placeholder:text-white-dark" />
+                            <ng-container
+                                *ngIf="signInForm.controls['username'].invalid && signInForm.controls['username'].touched">
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signInForm.controls['username'].hasError('required')">
+                                    Username is required.
+                                </p>
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signInForm.controls['username'].hasError('minlength')">
+                                    Username must be longer than 4 characters.
+                                </p>
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signInForm.controls['username'].hasError('maxlength')">
+                                    Username must be less than 20 characters.
+                                </p>
+                            </ng-container>
                         </div>
                         <div class="password">
-                            <input type="password" placeholder="Password"
+                            <input formControlName="password" type="password" placeholder="Password"
                                 class="form-input text-white-dark placeholder:text-white-dark" />
+                            <ng-container
+                                *ngIf="signInForm.controls['password'].invalid && signInForm.controls['password'].touched">
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signInForm.controls['password'].hasError('required')">
+                                    Password is required.
+                                </p>
+                                <p class="mt-1 text-danger"
+                                    *ngIf="signInForm.controls['password'].hasError('minlength')">
+                                    Password must be at least 6 characters long.
+                                </p>
+                            </ng-container>
                         </div>
-                        <button type="submit"
+                        <button type="submit" [disabled]="signInForm.invalid"
+                            [ngClass]="{'opacity-50': signInForm.invalid}"
                             class="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
-                            Sign in
+                            Sign Up
                         </button>
                     </form>
                     <div class="relative my-7 text-center md:mb-9">

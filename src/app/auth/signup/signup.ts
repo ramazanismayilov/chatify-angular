@@ -52,7 +52,6 @@ export class SignupComponent implements OnInit {
                 if (error.error.suggestions) {
                     this.usernameSuggestions = error.error.suggestions
                 }
-                this.notificationService.showMessage(error.error.message, 'error', 'top');
             }
         })
     }

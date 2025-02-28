@@ -1,1 +1,94 @@
-<p>profile works!</p>
+<div class="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3 xl:grid-cols-5">
+    <div class="panel lg:col-span-2 xl:col-span-2">
+        <div class="mb-5 relative">
+            <div class="username flex items-center gap-2 cursor-pointer w-fit" (click)="toggleDropdown()">
+                <h5 class="text-lg font-semibold dark:text-white-light">
+                    {{userProfile?.username}}
+                </h5>
+                <icon-caret-down></icon-caret-down>
+            </div>
+            <div *ngIf="isDropdownOpen" class="absolute mt-1 bg-white shadow-lg rounded-lg z-10">
+                <div class="flex items-center gap-3 p-2">
+                    <img [src]="userProfile?.profile?.image ? userProfile?.profile?.image?.url : '/assets/images/avatar.jpeg'"
+                        [alt]="userProfile?.username" class="h-8 w-8 rounded-full object-cover" />
+                    <p class="text-md font-semibold">{{userProfile?.username}}</p>
+                </div>
+                <div class="border-t">
+                    <a routerLink="/auth/signup"
+                        class="flex items-center gap-1 w-fit px-4 py-2 hover:bg-gray-100 hover:rounded-lg">
+                        <icon-plus></icon-plus>
+                        Create New Account
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="mb-5">
+            <div class="flex items-center justify-between space-x-8">
+                <img [src]="userProfile?.profile?.image ? userProfile?.profile?.image?.url : '/assets/images/avatar.jpeg'"
+                    [alt]="userProfile?.username"
+                    class="mb-3 h-20 w-20 rounded-full object-cover border-2 border-gray-300 shadow-md" />
+                <div class="post-count flex flex-col items-center gap-1 text-center">
+                    <h5 class="text-[20px] font-bold">0</h5>
+                    <h3 class="text-[18px] dark:text-white-light">posts</h3>
+                </div>
+                <div class="post-count flex flex-col items-center gap-1 text-center">
+                    <h5 class="text-[20px] font-bold">{{userProfile?.profile?.follower}}</h5>
+                    <h3 class="text-[18px] dark:text-white-light">followers</h3>
+                </div>
+                <div class="post-count flex flex-col items-center gap-1 text-center">
+                    <h5 class="text-[20px] font-bold">{{userProfile?.profile?.following}}</h5>
+                    <h3 class="text-[18px] dark:text-white-light">following</h3>
+                </div>
+            </div>
+            <div>
+                <p class="text-md font-semibold text-black dark:text-white">{{userProfile?.profile?.fullName}}</p>
+                <p class="text-md font-semibold text-black dark:text-[#ccc]">{{userProfile?.profile?.bio}}</p>
+            </div>
+            <div class="flex items-center justify-between gap-4 mt-5">
+                <button (click)="modal7.open()" type="button" class="btn btn-outline-secondary w-full">Edit
+                    profile</button>
+                <button type="button" class="btn btn-outline-secondary w-full">Share profile</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel lg:col-span-2 xl:col-span-3">
+        <div class="mb-5">
+            <h5 class="text-lg font-semibold dark:text-white-light">Task</h5>
+        </div>
+    </div>
+</div>
+
+<ngx-custom-modal #modal7 customClass="modal-top small-modal">
+    <ng-template #modalHeader>
+        <div>Edit profile</div>
+    </ng-template>
+    <ng-template #modalBody>
+        <form>
+            <div class="fullName mb-3">
+                <input type="text" placeholder="Fullname" class="form-input" />
+            </div>
+            <div class="bio mb-3">
+                <textarea placeholder="Bio" class="form-input"></textarea>
+            </div>
+            <div class="image mb-3">
+                <input type="file" class="form-input hidden" id="fileInput" />
+                <label for="fileInput"
+                    class="custom-file-label border border-[#17263c] text-center py-3 px-2 rounded-lg cursor-pointer">
+                    <span class="text-gray-600">Choose an image</span>
+                </label>
+            </div>
+            <!-- <div class="isPrivate">
+                <label class="w-12 h-6 relative">
+                    <input type="checkbox"
+                        class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
+                        id="custom_switch_checkbox1" />
+                    <span for="custom_switch_checkbox1"
+                        class="outline_checkbox bg-icon border-2 border-[#ebedf2] dark:border-white-dark block h-full before:absolute before:left-1 before:bg-[#ebedf2] dark:before:bg-white-dark before:bottom-1 before:w-4 before:h-4 before:bg-[url(/assets/images/close.svg)] before:bg-no-repeat before:bg-center peer-checked:before:left-7 peer-checked:before:bg-[url(/assets/images/checked.svg)] peer-checked:border-primary peer-checked:before:bg-primary before:transition-all before:duration-300"></span>
+                </label>
+            </div> -->
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button type="button" (click)="modal7.close()" class="btn btn-primary ltr:ml-4 rtl:mr-4">Save</button>
+    </ng-template>
+</ngx-custom-modal>

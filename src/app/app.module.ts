@@ -3,9 +3,9 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { routes } from './app.route';
+import { routes } from './app.routes';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { indexReducer } from './store/index.reducer';
@@ -19,6 +19,8 @@ import { FooterComponent } from './layouts/footer';
 import { SidebarComponent } from './layouts/sidebar';
 import { ThemeCustomizerComponent } from './layouts/theme-customizer';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader {
@@ -54,7 +56,9 @@ export function HttpLoaderFactory(httpHandler: HttpBackend): TranslateHttpLoader
     providers: [
         Title,
         provideHttpClient(withInterceptorsFromDi()),
-        { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        provideAnimationsAsync(),
     ],
     bootstrap: [AppComponent],
 })
