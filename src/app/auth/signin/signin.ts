@@ -28,8 +28,6 @@ export class SigninComponent {
         private notificationService: NotificationService,
     ) {
         this.initStore();
-        console.log(this.store);
-        
     }
 
     ngOnInit() {

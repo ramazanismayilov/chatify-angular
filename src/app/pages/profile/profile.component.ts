@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDto } from 'src/app/core/models/user/user.dto';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -9,11 +10,22 @@ import { UserService } from 'src/app/core/services/user.service';
     standalone: false
 })
 export class ProfileComponent implements OnInit {
-    userProfile!: UserDto
+    userProfile!: any
+    updateProfileForm!: FormGroup
     isDropdownOpen = false;
-    constructor(private userService: UserService) { }
+    constructor(
+        private fb: FormBuilder,
+        private userService: UserService,
+        private notificationService: NotificationService,
+    ) { }
 
     ngOnInit() {
+        this.updateProfileForm = this.fb.group({
+            fullName: [''],
+            bio: [''],
+            imageId: [''],
+            isPrivate: [false],
+        })
         this.getProfile()
     }
 
@@ -26,7 +38,16 @@ export class ProfileComponent implements OnInit {
         })
     }
 
+    profileUpdate() {
+        this.userService.profileUpdate(this.updateProfileForm.value).subscribe({
+            next: (response) => {
+                this.notificationService.showMessage(response.message, 'success', 'top')
+                this.getProfile()
+            }
+        })
+    }
+
     toggleDropdown() {
         this.isDropdownOpen = !this.isDropdownOpen;
-      }
+    }
 }

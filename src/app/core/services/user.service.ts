@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserDto } from '../models/user/user.dto';
-import { ProfileUpdateDto } from '../models/user/profile.dto';
+import { ProfileUpdateDto, ProfileUpdateResponseDto } from '../models/user/profile.dto';
 import { FollowerDto, FollowingDto } from '../models/user/follow.dto';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class UserService {
     return this.http.get<UserDto>(`${environment.baseUrl}/users/profile`)
   }
 
-  profileUpdate(params: ProfileUpdateDto): Observable<ProfileUpdateDto> {
-    return this.http.post<ProfileUpdateDto>(`${environment.baseUrl}/users/profile`, params)
+  profileUpdate(params: ProfileUpdateDto): Observable<ProfileUpdateResponseDto> {
+    return this.http.post<ProfileUpdateResponseDto>(`${environment.baseUrl}/users/profile`, params)
   }
 
   getUserProfile(userId: number): Observable<UserDto> {

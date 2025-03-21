@@ -23,3 +23,7 @@ export interface ProfileUpdateDto {
     imageId?: string;
     isPrivate?: boolean;
 }
+
+export interface ProfileUpdateResponseDto {
+    message: string
+}

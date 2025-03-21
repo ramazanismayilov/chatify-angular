@@ -63,32 +63,32 @@
         <div>Edit profile</div>
     </ng-template>
     <ng-template #modalBody>
-        <form>
+        <form [formGroup]="updateProfileForm">
             <div class="fullName mb-3">
-                <input type="text" placeholder="Fullname" class="form-input" />
+                <input formControlName="fullName" type="text" placeholder="Fullname" class="form-input" />
             </div>
             <div class="bio mb-3">
-                <textarea placeholder="Bio" class="form-input"></textarea>
+                <textarea formControlName="bio" placeholder="Bio" class="form-input"></textarea>
             </div>
             <div class="image mb-3">
-                <input type="file" class="form-input hidden" id="fileInput" />
+                <input formControlName="imageId" type="file" class="form-input hidden" id="fileInput" />
                 <label for="fileInput"
-                    class="custom-file-label border border-[#17263c] text-center py-3 px-2 rounded-lg cursor-pointer">
+                    class="custom-file-label border border-[#17263c] bg-[#121E32] hover:opacity-75 text-center py-3 px-2 rounded-lg cursor-pointer">
                     <span class="text-gray-600">Choose an image</span>
                 </label>
             </div>
-            <!-- <div class="isPrivate">
+            <div class="isPrivate">
                 <label class="w-12 h-6 relative">
-                    <input type="checkbox"
+                    <input formControlName="isPrivate" type="checkbox"
                         class="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
                         id="custom_switch_checkbox1" />
                     <span for="custom_switch_checkbox1"
-                        class="outline_checkbox bg-icon border-2 border-[#ebedf2] dark:border-white-dark block h-full before:absolute before:left-1 before:bg-[#ebedf2] dark:before:bg-white-dark before:bottom-1 before:w-4 before:h-4 before:bg-[url(/assets/images/close.svg)] before:bg-no-repeat before:bg-center peer-checked:before:left-7 peer-checked:before:bg-[url(/assets/images/checked.svg)] peer-checked:border-primary peer-checked:before:bg-primary before:transition-all before:duration-300"></span>
+                        class="outline_checkbox bg-icon border-2 border-[#ebedf2] dark:border-white-dark block h-full before:absolute before:left-1 before:bg-[#ebedf2] dark:before:bg-white-dark before:bottom-1 before:w-4 before:h-4 before:bg-[url(/assets/icons/close.svg)] before:bg-no-repeat before:bg-center peer-checked:before:left-7 peer-checked:before:bg-[url(/assets/icons/checked.svg)] peer-checked:border-primary peer-checked:before:bg-primary before:transition-all before:duration-300"></span>
                 </label>
-            </div> -->
+            </div>
         </form>
     </ng-template>
     <ng-template #modalFooter>
-        <button type="button" (click)="modal7.close()" class="btn btn-primary ltr:ml-4 rtl:mr-4">Save</button>
+        <button type="button" (click)="profileUpdate()" class="btn btn-primary ltr:ml-4 rtl:mr-4">Save</button>
     </ng-template>
 </ngx-custom-modal>
